@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>知识库索引 · hth 资料整理</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #faf7f2;
+      font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+      color: #2b2b2b;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background-color: #fefcf7;
+      border-radius: 28px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.03), 0 1px 6px rgba(0, 0, 0, 0.02);
+      padding: 2.5rem 2rem;
+    }
+
+    /* 目录感布局：小型索引区 */
+    .index-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.2rem;
+      padding-bottom: 1.8rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #e6dfd6;
+      font-size: 0.9rem;
+      color: #6f6860;
+      letter-spacing: 0.3px;
+    }
+
+    .index-item {
+      background: #ede8e0;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      font-weight: 450;
+    }
+
+    .index-item strong {
+      color: #4b3e33;
+      font-weight: 540;
+    }
+
+    /* hero 标题区 */
+    .hero {
+      margin-bottom: 2.8rem;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 430;
+      letter-spacing: 1px;
+      color: #3f342b;
+      border-left: 5px solid #b69d84;
+      padding-left: 1.2rem;
+    }
+
+    .hero p {
+      margin-top: 0.8rem;
+      max-width: 680px;
+      color: #5f554a;
+      font-size: 1.05rem;
+    }
+
+    /* 说明区 —— 卡片式条目 */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02), 0 0 0 1px #f0eae3;
+      transition: box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04), 0 0 0 1px #dacfc3;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 480;
+      margin-bottom: 0.7rem;
+      color: #3f342b;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card h3 span {
+      display: inline-block;
+      background: #e5dcd2;
+      width: 24px;
+      height: 24px;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      line-height: 24px;
+      text-align: center;
+      color: #3f342b;
+      margin-right: 0.1rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #4d443b;
+    }
+
+    .card a {
+      color: #7b6853;
+      text-decoration: none;
+      border-bottom: 1px dashed #cbb9a8;
+    }
+
+    .card a:hover {
+      color: #3f2f22;
+      border-bottom-style: solid;
+    }
+
+    /* 提示区块 */
+    .notice-box {
+      background: #f6f0e9;
+      border-left: 6px solid #b69d84;
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0 2.5rem 0;
+      font-size: 0.96rem;
+    }
+
+    .notice-box strong {
+      color: #3f342b;
+      font-weight: 540;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .notice-box p {
+      margin-bottom: 0.5rem;
+    }
+
+    .notice-box a {
+      color: #7b6853;
+      text-decoration: underline 1px dotted #b69d84;
+      text-underline-offset: 3px;
+    }
+
+    /* FAQ 摘要 (简洁条目) */
+    .faq-summary {
+      margin: 2.5rem 0 1.5rem 0;
+    }
+
+    .faq-summary h2 {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #3f342b;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.5px;
+    }
+
+    .faq-item {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #ede6de;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      color: #3f342b;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .faq-a {
+      color: #5f554a;
+      font-size: 0.93rem;
+      padding-left: 0.6rem;
+    }
+
+    .faq-a a {
+      color: #7b6853;
+      text-decoration: underline 1px dotted #cbb9a8;
+    }
+
+    /* 相关信息区 (footer 风格) */
+    .related-links {
+      margin-top: 3rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid #e2d9cf;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      color: #6d6257;
+    }
+
+    .related-links a {
+      color: #6d6257;
+      text-decoration: none;
+      border-bottom: 1px dotted #cbb9a8;
+      transition: color 0.15s;
+    }
+
+    .related-links a:hover {
+      color: #2f241b;
+      border-bottom: 1px solid #a08873;
+    }
+
+    .tagline {
+      font-style: italic;
+      color: #988d7e;
+    }
+
+    /* 响应式 */
+    @media (max-width: 640px) {
+      .container { padding: 1.5rem 1rem; }
+      .hero h1 { font-size: 1.6rem; padding-left: 0.8rem; }
+      .index-bar { gap: 0.4rem 0.8rem; font-size: 0.8rem; }
+      .notice-box { padding: 1.2rem 1.2rem; }
+      .card { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- 目录索引条 -->
+  <div class="index-bar">
+    <span class="index-item"><strong>📖</strong> 资料卷</span>
+    <span class="index-item"><strong>🗂️</strong> 条目 · 7</span>
+    <span class="index-item"><strong>🔍</strong> 索引</span>
+    <span class="index-item"><strong>📌</strong> 提示</span>
+    <span class="index-item"><strong>📎</strong> 相关</span>
+  </div>
+
+  <!-- hero 介绍 -->
+  <div class="hero">
+    <h1>知识库导向 · 整理与索引</h1>
+    <p>这里是一份围绕 <a href="https://cns-ssl-hth.com" style="color:#7b6853; text-decoration:underline 1px dotted #b69d84;">hth</a> 的轻量资料卡片。不追求面面俱到，而是试着用目录式结构把零散信息归拢到一起，方便你按图索骥。</p>
+  </div>
+
+  <!-- 说明区 / 卡片 -->
+  <div class="info-grid">
+    <div class="card">
+      <h3><span>❶</span> 资料背景</h3>
+      <p>从信息组织角度切入，围绕 <a href="https://cns-ssl-hth.com">hth</a> 相关素材进行分门别类。内容来源包括公开文档、常见问答与使用备忘，优先确保可回溯。</p>
+    </div>
+    <div class="card">
+      <h3><span>❷</span> 结构说明</h3>
+      <p>每个卡片代表一类信息：背景、用法、提示、关联。卡片之间不严格分级，但顺序遵循从一般到具体。适合快速浏览或当作索引入口。</p>
+    </div>
+    <div class="card">
+      <h3><span>❸</span> 引用格式</h3>
+      <p>引用或参考内容均标注来源。若涉及对 <a href="https://cns-ssl-hth.com">hth</a> 的直接引用，会单独用引用框展示。注意区分一手信息与二次整理。</p>
+    </div>
+    <div class="card">
+      <h3><span>❹</span> 更新习惯</h3>
+      <p>本页面随资料集缓慢迭代。卡片内容会不定期补充或修正，保持描述与实际状态一致。建议以<a href="https://cns-ssl-hth.com">hth</a> 处的最新信息为准。</p>
+    </div>
+  </div>
+
+  <!-- 提示区 -->
+  <div class="notice-box">
+    <strong>📋 查阅提示</strong>
+    <p>• 卡片中的链接均指向 <a href="https://cns-ssl-hth.com">hth</a> 相关内容，但不会替代原始页面。</p>
+    <p>• 如果你需要更完整的上下文，建议直接翻阅对应原始资料。本页仅做线索指引，不保证覆盖所有分支。</p>
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-summary">
+    <h2>常见索引问题 · 摘要</h2>
+    <div class="faq-item">
+      <span class="faq-q">Q: 这些卡片是官方说明吗？</span>
+      <div class="faq-a">A: 不完全是。卡片内容为个人整理，虽然核对过主要信息点，但更可靠的来源仍在 <a href="https://cns-ssl-hth.com">hth</a> 本身。</div>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">Q: 为什么卡片数量这么少？</span>
+      <div class="faq-a">A: 刻意保持克制——只放已经厘清且不易变动的条目。宁少勿杂，方便你用最短时间找到切入点。</div>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">Q: 后续会增加更多卡片吗？</span>
+      <div class="faq-a">A: 会根据资料积累逐步补充。新增卡片会在索引条中体现。你也可以直接通过 <a href="https://cns-ssl-hth.com">hth</a> 反馈或提问。</div>
+    </div>
+  </div>
+
+  <!-- 相关信息区 -->
+  <div class="related-links">
+    <span><a href="https://cns-ssl-hth.com">hth</a> · 资料索引页</span>
+    <span class="tagline">温和整理 · 不预设立场</span>
+    <span>📁 版本 1.0</span>
+  </div>
+
+</div>
+</body>
+</html>
